@@ -11,10 +11,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons from "../constants/icons";
 import images from "../constants/images";
-// import loggedUserStore from "../stores/userDataStore";
 import { useNavigation } from "@react-navigation/native";
+import { useLoginStore } from "../stores/authDataStore";
 
 export default function HomeScreen() {
+  const profileData = useLoginStore((state) => state.profileData);
   const navigation = useNavigation();
   //   const loggedUserProfileImg = loggedUserStore(
   //     (state) => state.loggedUserData.loggedUserProfileImg
@@ -30,21 +31,27 @@ export default function HomeScreen() {
         className="flex flex-row justify-between items-center mt-2 mb-2 ml-4 mr-4"
         onPress={() => {
           //   router.push("/(root)/(tabs)/me");
+          navigation.navigate("profile");
         }}
       >
-        <View className="flex-row justify-center items-center">
+        <View className="flex-row justify-center items-center rounded-full">
           <Image
-          // source={{ uri: `${serverEndPoint}${loggedUserProfileImg}` }}
-          // className="size-14 rounded-full"
+            // source={{ uri: `${serverEndPoint}${loggedUserProfileImg}` }}
+            // className="size-14 rounded-full"
+
+            source={images.realucs}
+            className="size-14 rounded-full border border-gray-400"
           />
           <View className="flex-col m-2 items-start justify-start">
             <Text className="text-gray-500 text-xs">Welcome Back</Text>
-            <Text className="font-rubik-light font-bold">Zin Min Thet</Text>
+            <Text className="font-rubik-light font-bold">
+              {profileData.name?.toUpperCase()}
+            </Text>
           </View>
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("home");
+            navigation.navigate("chat");
           }}
         >
           <Image source={icons.chat} className="size-7" tintColor={"#0000FF"} />
@@ -65,7 +72,7 @@ export default function HomeScreen() {
                 className="size-9 ml-2 mr-2 justify-center items-center"
               />
             </View>
-            <Text className="text-gray-500 text-xs m-2">UCS (Mdy)</Text>
+            <Text className="text-gray-500 text-xs m-2">UCS(MDY)</Text>
           </View>
 
           <View className="bg-white h-24 w-52 rounded-lg items-start justify-center">
@@ -157,7 +164,7 @@ export default function HomeScreen() {
             <TouchableOpacity
               className="bg-blue-500 p-2 w-24 rounded-lg mt-2"
               onPress={() => {
-                router.push("/(root)/ReconIntor");
+                navigation.push("reconIntro");
               }}
             >
               <Text className="text-2xs text-center">Mark</Text>

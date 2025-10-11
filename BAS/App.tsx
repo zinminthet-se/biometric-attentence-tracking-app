@@ -3,12 +3,13 @@ import { StyleSheet, Text, View } from "react-native";
 import "./global.css";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import AppStack from "./AppStack";
+import AppStack from "./navigations/AppStack";
+import AuthStack from "./navigations/AuthStack";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <AppStack />
+      <AuthStack />
     </NavigationContainer>
   );
 }

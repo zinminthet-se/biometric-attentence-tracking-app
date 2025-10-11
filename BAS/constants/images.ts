@@ -6,6 +6,7 @@ import ucsLogo from "../assets/images/ucsLogo.jpg";
 import realucs from "../assets/images/realucs.jpg";
 import clock from "../assets/images/clock.jpg";
 import social from "../assets/images/social.png";
+import defaultProfile from "../assets/images/defaultProfile.png";
 
 export default {
   onboarding,
@@ -16,4 +17,5 @@ export default {
   ucsLogo,
   clock,
   realucs,
+  defaultProfile,
 };

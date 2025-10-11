@@ -24,7 +24,7 @@ export default function WelcomeScreen() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = () => {
-    navigation.navigate("home");
+    navigation.navigate("tabs");
   };
   // project show test region
 

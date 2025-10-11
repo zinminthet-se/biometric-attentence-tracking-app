@@ -5,7 +5,7 @@ import images from "../constants/images";
 import icons from "../constants/icons";
 import { useNavigation } from "@react-navigation/native";
 
-const RecoIntroScreen = () => {
+const FaceSampleIntro = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView className="h-full bg-white">
@@ -22,10 +22,15 @@ const RecoIntroScreen = () => {
           />
         </View>
         <View className="flex-col justify-center items-center">
-          <Text className="text-2xl font-semibold">Face Recognition</Text>
+          <Text className="text-2xl font-semibold">Upload your photo</Text>
           <Text className="text-center text-gray-400">
-            Your data will not be stored for more than 2 days {`\n`}
-            in any server or databases
+            This photo will be used as a reference for future {`\n`}{" "}
+            verification and{" "}
+            <Text className="text-red-500">
+              cannot be modified
+              {`\n`}
+            </Text>
+            <Text> once uploaded</Text>
           </Text>
         </View>
         <View className="absolute bottom-2 w-full">
@@ -35,11 +40,11 @@ const RecoIntroScreen = () => {
               navigation.navigate("detect");
             }}
           >
-            <Text className="text-white">Take attendance</Text>
+            <Text className="text-white">Take Photo</Text>
           </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
   );
 };
-export default RecoIntroScreen;
+export default FaceSampleIntro;

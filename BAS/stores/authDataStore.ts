@@ -15,7 +15,7 @@ type loginStore = {
     university: null | string;
     userId: null | string;
   };
-  login: (rollNumber: string, password: string, token: string) => Promise<void>;
+  login: (rollNumber: string, token: string) => Promise<void>;
   logout: () => Promise<void>;
   hydrate: (
     name: string,
@@ -40,15 +40,10 @@ export const useLoginStore = create<loginStore>((set) => ({
     university: null,
   },
   token: null,
-  login: async (rollNumber, password, token) => {
-    await Keychain.setGenericPassword("jwt_auth_token", token, {
-      service: "api-jwt-token",
-    });
-    await Keychain.setGenericPassword("password", password, {
-      service: "account_password",
-    });
-
-    set({ token, rollNumber: rollNumber, isLoggedIn: true });
+  login: async (rollNumber, api_token) => {
+    console.log("this is toknen in authstore", api_token);
+    await AsyncStorage.setItem("@token", api_token);
+    set({ token: api_token, rollNumber: rollNumber, isLoggedIn: true });
   },
   hydrate: async (name, phoneNumber, email, rollNumber, university, userId) => {
     const profileData = {
@@ -60,7 +55,8 @@ export const useLoginStore = create<loginStore>((set) => ({
       userId,
     };
     await AsyncStorage.setItem("@profileData", JSON.stringify(profileData));
-    set({ profileData: profileData });
+    await AsyncStorage.setItem("@isLoggedIn", "true");
+    set({ profileData: profileData, isLoggedIn: true });
   },
   logout: async () => {
     set({
